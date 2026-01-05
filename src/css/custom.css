@@ -1,0 +1,266 @@
+/**
+ * DollarStore Documentation - Custom Styles
+ * Based on dollarstore.world style guide
+ */
+
+/* Import JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* Color palette from style guide */
+:root {
+  /* Primary colors */
+  --ds-black: #0A0A0A;
+  --ds-deep-green: #0D1A12;
+  --ds-dollar-green: #85BB65;
+  --ds-white: #F5F5F5;
+  --ds-gold: #D4AF37;
+
+  /* Secondary colors */
+  --ds-muted: #6B7280;
+  --ds-error: #DC2626;
+  --ds-border: #1F2A23;
+  --ds-hover: #0F2318;
+}
+
+/* Dark theme (only theme) */
+[data-theme='dark'] {
+  /* Infima overrides */
+  --ifm-color-primary: #85BB65;
+  --ifm-color-primary-dark: #74ad52;
+  --ifm-color-primary-darker: #6ba349;
+  --ifm-color-primary-darkest: #588738;
+  --ifm-color-primary-light: #96c578;
+  --ifm-color-primary-lighter: #9fca84;
+  --ifm-color-primary-lightest: #b8d9a3;
+
+  /* Background colors */
+  --ifm-background-color: #0A0A0A;
+  --ifm-background-surface-color: #0D1A12;
+
+  /* Text colors */
+  --ifm-font-color-base: #F5F5F5;
+  --ifm-font-color-secondary: #6B7280;
+
+  /* Navbar */
+  --ifm-navbar-background-color: #0A0A0A;
+  --ifm-navbar-link-color: #F5F5F5;
+  --ifm-navbar-link-hover-color: #85BB65;
+
+  /* Footer */
+  --ifm-footer-background-color: #0D1A12;
+  --ifm-footer-color: #6B7280;
+  --ifm-footer-link-color: #F5F5F5;
+  --ifm-footer-link-hover-color: #85BB65;
+  --ifm-footer-title-color: #F5F5F5;
+
+  /* Sidebar */
+  --ifm-menu-color: #F5F5F5;
+  --ifm-menu-color-active: #85BB65;
+  --ifm-menu-color-background-active: rgba(133, 187, 101, 0.1);
+  --ifm-menu-color-background-hover: rgba(133, 187, 101, 0.05);
+
+  /* Code blocks */
+  --ifm-code-background: #0D1A12;
+  --ifm-code-font-size: 14px;
+  --docusaurus-highlighted-code-line-bg: rgba(133, 187, 101, 0.15);
+
+  /* Links */
+  --ifm-link-color: #85BB65;
+  --ifm-link-hover-color: #9fca84;
+
+  /* Borders */
+  --ifm-toc-border-color: #1F2A23;
+  --ifm-hr-border-color: #1F2A23;
+
+  /* Cards/Alerts */
+  --ifm-alert-background-color: #0D1A12;
+  --ifm-alert-border-color: #1F2A23;
+}
+
+/* Typography - JetBrains Mono everywhere */
+:root {
+  --ifm-font-family-base: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  --ifm-heading-font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+}
+
+/* Heading styles */
+h1 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-weight: 600;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+/* Navbar title styling */
+.navbar__title {
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+/* Navbar link styling */
+.navbar__link {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Sidebar styling */
+.menu__link {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.menu__link--active {
+  font-weight: 500;
+}
+
+/* Footer styling */
+.footer {
+  border-top: 1px solid #1F2A23;
+}
+
+.footer__title {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6B7280;
+}
+
+.footer__link-item {
+  font-size: 14px;
+}
+
+.footer__copyright {
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 24px;
+}
+
+/* Code block styling */
+pre {
+  border: 1px solid #1F2A23;
+  border-radius: 8px;
+}
+
+code {
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background-color: rgba(133, 187, 101, 0.1);
+  border: 1px solid #1F2A23;
+  color: #85BB65;
+  padding: 2px 6px;
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+}
+
+th {
+  background-color: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6B7280;
+  border-bottom: 1px solid #1F2A23;
+}
+
+td {
+  border-bottom: 1px solid #1F2A23;
+}
+
+tr:hover td {
+  background-color: #0F2318;
+}
+
+/* Admonition/Alert styling */
+.alert {
+  border-radius: 8px;
+  border-width: 1px;
+}
+
+.alert--info {
+  --ifm-alert-background-color: rgba(133, 187, 101, 0.1);
+  --ifm-alert-border-color: #85BB65;
+}
+
+.alert--warning {
+  --ifm-alert-background-color: rgba(212, 175, 55, 0.1);
+  --ifm-alert-border-color: #D4AF37;
+}
+
+.alert--danger {
+  --ifm-alert-background-color: rgba(220, 38, 38, 0.1);
+  --ifm-alert-border-color: #DC2626;
+}
+
+/* TOC styling */
+.table-of-contents__link {
+  font-size: 13px;
+}
+
+.table-of-contents__link--active {
+  color: #85BB65;
+}
+
+/* Pagination styling */
+.pagination-nav__link {
+  border: 1px solid #1F2A23;
+  border-radius: 8px;
+}
+
+.pagination-nav__link:hover {
+  border-color: #85BB65;
+  background-color: #0F2318;
+}
+
+/* Search (if added later) */
+.DocSearch-Button {
+  background-color: #0D1A12 !important;
+  border: 1px solid #1F2A23 !important;
+  border-radius: 4px !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1F2A23;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2D4A35;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: rgba(133, 187, 101, 0.3);
+}
+
+/* Mobile adjustments */
+@media (max-width: 996px) {
+  .navbar__title {
+    font-size: 16px;
+  }
+}

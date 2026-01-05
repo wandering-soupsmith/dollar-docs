@@ -1,0 +1,131 @@
+import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
+
+const config: Config = {
+  title: 'DollarStore',
+  tagline: '1:1 stablecoin swaps',
+  favicon: 'img/favicon.ico',
+
+  future: {
+    v4: true,
+  },
+
+  url: 'https://docs.dollarstore.world',
+  baseUrl: '/',
+
+  organizationName: 'wandering-soupsmith',
+  projectName: 'dollar-docs',
+
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
+
+  presets: [
+    [
+      'classic',
+      {
+        docs: {
+          path: 'content', // Use content folder for docs (docs/ is gitignored for reference)
+          sidebarPath: './sidebars.ts',
+          routeBasePath: '/', // Docs at root, no /docs/ prefix
+          editUrl: 'https://github.com/wandering-soupsmith/dollar-docs/tree/main/',
+        },
+        blog: false, // Disable blog
+        theme: {
+          customCss: './src/css/custom.css',
+        },
+      } satisfies Preset.Options,
+    ],
+  ],
+
+  themeConfig: {
+    image: 'img/dollarstore-social.png',
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: true, // Dark only
+      respectPrefersColorScheme: false,
+    },
+    navbar: {
+      title: 'dollarstore',
+      items: [
+        {
+          type: 'docSidebar',
+          sidebarId: 'docsSidebar',
+          position: 'left',
+          label: 'Docs',
+        },
+        {
+          href: 'https://dollarstore.world',
+          label: 'App',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/wandering-soupsmith/dollar',
+          label: 'GitHub',
+          position: 'right',
+        },
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: 'Documentation',
+          items: [
+            {
+              label: 'Idea',
+              to: '/',
+            },
+            {
+              label: 'Concepts',
+              to: '/concepts/dlrs',
+            },
+            {
+              label: 'Capabilities',
+              to: '/capabilities/overview',
+            },
+          ],
+        },
+        {
+          title: 'Links',
+          items: [
+            {
+              label: 'dollarstore.world',
+              href: 'https://dollarstore.world',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/wandering-soupsmith/dollar',
+            },
+          ],
+        },
+        {
+          title: 'Contracts (Sepolia)',
+          items: [
+            {
+              label: 'DollarStore',
+              href: 'https://sepolia.etherscan.io/address/0x0D748365aA0A38EBaF6Df0C46f0Ebf2D79837c30',
+            },
+            {
+              label: 'DLRS Token',
+              href: 'https://sepolia.etherscan.io/address/0xe78e2CfC18DaB60dbfEEBd83A7562D241Fc295F0',
+            },
+          ],
+        },
+      ],
+      copyright: `Unaudited software. Use at your own risk.`,
+    },
+    prism: {
+      theme: prismThemes.dracula,
+      darkTheme: prismThemes.dracula,
+      additionalLanguages: ['solidity'],
+    },
+  } satisfies Preset.ThemeConfig,
+};
+
+export default config;
