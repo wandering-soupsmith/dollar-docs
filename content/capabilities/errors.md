@@ -172,16 +172,6 @@ The `swapExactInput` deadline has passed. Transaction was either delayed or dead
 
 ---
 
-### TransferFailed
-
-```solidity
-error TransferFailed();
-```
-
-ERC-20 transfer failed. Usually means insufficient allowance or balance.
-
----
-
 ## Admin errors
 
 ### OnlyAdmin

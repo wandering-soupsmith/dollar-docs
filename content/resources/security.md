@@ -54,19 +54,6 @@ The aggregator function either fully fills or reverts. No slippage protection is
 
 If you're in queue and the stablecoin depegs, your position is still denominated in that stablecoin. DollarStore doesn't handle depeg scenarios.
 
-### Admin has significant power
-
-The admin can:
-- Add/remove stablecoins
-- Pause all operations
-- Transfer admin role
-
-The admin cannot:
-- Access user funds directly
-- Change the 1:1 rate
-- Skip queue positions
-- Mint DLRS arbitrarily
-
 ## Bug bounty
 
 No formal bug bounty program exists yet. If you find a vulnerability, please report responsibly to the team.

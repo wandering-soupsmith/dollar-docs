@@ -26,14 +26,6 @@ description: Deployed contract addresses
 DollarStore is not yet deployed to mainnet. This section will be updated when mainnet deployment occurs.
 :::
 
-## Getting test tokens
-
-For Sepolia testing:
-
-1. Get Sepolia ETH from a faucet for gas
-2. Get test USDC from [Circle's Sepolia faucet](https://faucet.circle.com/)
-3. Interact with DollarStore on Sepolia
-
 ## Interface
 
 The canonical interface is `IDollarStore.sol`:

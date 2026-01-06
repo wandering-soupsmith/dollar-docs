@@ -26,11 +26,15 @@ When you call `swap(fromStablecoin, toStablecoin, amount, queueIfUnavailable)`:
     → Done (instant swap)
 
 4b. If reserves < amount:
-    → Transfer available reserves to user (partial fill)
-    → Remaining amount either:
-      - Queued (if queueIfUnavailable = true)
-      - Minted as DLRS (if queueIfUnavailable = false)
+    → If some reserves available (partial fill):
+      - Transfer available reserves to user
+      - Remaining either queued (if queueIfUnavailable = true) or minted as DLRS (if false)
+    → If zero reserves:
+      - Queue entire amount (if queueIfUnavailable = true)
+      - REVERT (if queueIfUnavailable = false)
 ```
+
+**Note:** If you want "all or nothing" behavior, use `queueIfUnavailable = false` and rely on the revert when reserves are insufficient. The revert is the authoritative check—while you can call `getReserve()` first, race conditions mean reserves may change between your check and the swap.
 
 ## Example: Full instant swap
 
