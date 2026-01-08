@@ -10,70 +10,70 @@ description: Frequently asked questions
 
 ### What is DollarStore?
 
-DollarStore is a zero-fee stablecoin swap protocol. It lets you swap between stablecoins (USDC, USDT) at exactly 1:1, with no slippage and no fees.
+DollarStore is open-source smart contract software that enables zero-fee stablecoin swaps. Users can swap between stablecoins (USDC, USDT) at exactly 1:1, with no slippage and no fees.
 
 ### What's the catch?
 
-Time. If reserves are available, swaps are instant. If not, you wait in a queue until someone deposits what you need.
+Time. If reserves are available, the protocol executes swaps instantly. If not, users wait in a queue until someone supplies what they need.
 
-### Why would I use this instead of Uniswap?
+### Why use this instead of Uniswap?
 
-If you're swapping stablecoins and care more about price than speed. On a DEX, you lose 0.01-0.3% to slippage and fees. On DollarStore, you get exactly 1:1.
+For users swapping stablecoins who care more about price than speed. On a DEX, users lose 0.01-0.3% to slippage and fees. The DollarStore protocol executes at exactly 1:1.
 
 ### Is there a token?
 
-Yes, DLRS. But it's not a governance token—it's a receipt token that represents your claim on the reserve pool. You can't buy it; you get it by depositing stablecoins.
+DLRS is an internal accounting reference used by the protocol to track liquidity contributions. It's not a governance token, stablecoin, or tradeable asset. Users receive DLRS when supplying stablecoins to the protocol.
 
 ---
 
-## Using DollarStore
+## Using the Protocol
 
 ### How do I swap USDC for USDT?
 
-1. Approve DollarStore to spend your USDC
+1. Approve the DollarStore contract to spend USDC
 2. Call `swap(USDC, USDT, amount, true)`
-3. Receive USDT instantly (if reserves available) or join queue
+3. Protocol transfers USDT instantly (if reserves available) or adds user to queue
 
 ### What happens if reserves are empty?
 
-You have options:
-- Queue for what you want (wait for deposits)
-- Receive DLRS instead (redeem later for any stablecoin)
+Users have options:
+- Queue for what's needed (wait for others to supply)
+- Receive DLRS instead (use later within the protocol)
 - Revert the transaction (aggregator mode only)
 
 ### How long will I wait in queue?
 
-Depends entirely on when someone deposits the stablecoin you want. Could be seconds, could be days. The queue is processed automatically whenever deposits arrive.
+Depends entirely on when someone supplies the stablecoin needed. Could be seconds, could be days. The queue is processed automatically whenever supplies arrive.
 
 ### Can I cancel my queue position?
 
-Yes. Call `cancelQueue(positionId)` to exit the queue and receive your DLRS back.
+Yes. Calling `cancelQueue(positionId)` exits the queue. The protocol returns the DLRS.
 
 ### What if my position is partially filled?
 
-You receive partial fills as they happen (as stablecoin), and your position updates to reflect the remaining amount. When you cancel, you get back any unfilled DLRS.
+Users receive partial fills as they happen (as stablecoin), and the position updates to reflect the remaining amount. When canceled, the protocol returns any unfilled DLRS.
 
 ---
 
-## DLRS Token
+## DLRS
 
 ### What is DLRS?
 
-DLRS is a receipt token. When you deposit 1,000 USDC, you receive 1,000 DLRS. It represents a 1:1 claim on the reserve pool.
+DLRS is a non-transferable, internal accounting reference used by the DollarStore protocol. When a user supplies 1,000 USDC, the system records 1,000 DLRS. It tracks contributions to the liquidity pool.
 
-### Can I trade DLRS?
+### Can I transfer or trade DLRS?
 
-It's an ERC-20 token, so technically yes. But it's designed as a receipt token, not a speculative asset.
+No. DLRS is non-transferable. Calls to `transfer()`, `transferFrom()`, and `approve()` revert with `NonTransferable()`. It exists solely as an internal accounting mechanism.
 
-### Is DLRS always worth $1?
+### What can I do with DLRS?
 
-DLRS is redeemable 1:1 for any supported stablecoin (subject to reserve availability). Its value depends on the underlying stablecoins maintaining their peg.
+DLRS can be used within the protocol to request stablecoins from reserves or enter the queue.
 
 ---
 
 ## For integrators
 
-### How do I integrate DollarStore as an aggregator?
+### How do aggregators integrate DollarStore?
 
 1. Call `getSwapQuote(from, to, amount)` to check fillability
 2. If quote > 0, call `swapExactInput(...)` to execute
@@ -94,9 +94,9 @@ Varies by operation and queue state. Rough estimates:
 
 ## Technical
 
-### What chains is DollarStore on?
+### What chains is the protocol on?
 
-Currently Sepolia testnet only. Mainnet deployment TBD.
+The contracts are currently deployed on Sepolia testnet only.
 
 ### Is the contract upgradeable?
 

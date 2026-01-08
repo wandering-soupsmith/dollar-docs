@@ -7,22 +7,22 @@ description: Security considerations and trust assumptions
 # Security
 
 :::danger Unaudited Software
-DollarStore has **not been audited**. Use at your own risk. Do not deposit funds you cannot afford to lose.
+This software has **not been audited**. Use at your own risk. Do not supply funds you cannot afford to lose.
 :::
 
 ## Trust assumptions
 
 ### What you trust
 
-1. **The admin**: Can add/remove supported stablecoins, pause the contract, and transfer admin role
+1. **The admin address**: Can add/remove supported stablecoins, pause the contract, and transfer admin role
 2. **The smart contract code**: Has not been formally verified or audited
-3. **Underlying stablecoins**: DollarStore assumes USDC/USDT maintain their peg
+3. **Underlying stablecoins**: The protocol assumes USDC/USDT maintain their peg
 
 ### What you don't need to trust
 
 1. **Price feeds**: No oracles—1:1 is hardcoded
 2. **Liquidity providers**: No LPs, no impermanent loss
-3. **Governance**: No token, no voting, no time-delayed changes (except admin transfer)
+3. **Governance**: No governance token, no voting, no time-delayed changes (except admin transfer)
 
 ## Security measures
 
@@ -44,7 +44,7 @@ DollarStore has **not been audited**. Use at your own risk. Do not deposit funds
 
 ### Reserves can be depleted
 
-If everyone wants the same stablecoin, reserves deplete and users queue. This is by design—the tradeoff is time, not price.
+If everyone wants the same stablecoin, reserves deplete and users queue. This is by design—the protocol's tradeoff is time, not price.
 
 ### No partial fill protection for `swapExactInput`
 
@@ -52,7 +52,7 @@ The aggregator function either fully fills or reverts. No slippage protection is
 
 ### Queue position value can change
 
-If you're in queue and the stablecoin depegs, your position is still denominated in that stablecoin. DollarStore doesn't handle depeg scenarios.
+If a user is in queue and the stablecoin depegs, the position is still denominated in that stablecoin. The protocol doesn't handle depeg scenarios.
 
 ## Bug bounty
 
@@ -62,5 +62,5 @@ No formal bug bounty program exists yet. If you find a vulnerability, please rep
 
 1. **Start small**: Test with small amounts first
 2. **Verify addresses**: Always verify contract addresses from official sources
-3. **Monitor positions**: Watch your queue positions for fills
+3. **Monitor positions**: Watch queue positions for fills
 4. **Understand the risks**: This is experimental software

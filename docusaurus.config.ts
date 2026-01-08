@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'DollarStore',
   tagline: '1:1 stablecoin swaps',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   future: {
     v4: true,
@@ -52,6 +52,10 @@ const config: Config = {
     },
     navbar: {
       title: 'dollarstore',
+      logo: {
+        alt: 'DollarStore Logo',
+        src: 'img/logo.svg',
+      },
       items: [
         {
           type: 'docSidebar',
@@ -83,7 +87,7 @@ const config: Config = {
             },
             {
               label: 'Concepts',
-              to: '/concepts/dlrs',
+              to: '/concepts/supply',
             },
             {
               label: 'Capabilities',

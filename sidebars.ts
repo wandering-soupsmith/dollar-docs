@@ -9,7 +9,7 @@ const sidebars: SidebarsConfig = {
       label: 'Concepts',
       collapsed: false,
       items: [
-        'concepts/dlrs',
+        'concepts/supply',
         'concepts/queue',
         'concepts/time-tradeoff',
         'concepts/resolution',

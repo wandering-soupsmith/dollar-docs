@@ -6,50 +6,48 @@ description: How the FIFO queue system works
 
 # The Queue
 
-When you want a stablecoin that isn't available in reserves, you join a queue. The queue is processed in strict FIFO (First In, First Out) order.
+When a user wants a stablecoin that isn't currently in supply, they can get in line for it. The queue is processed in strict FIFO (First In, First Out) order.
 
-## Joining the queue
+## How it works
 
-To join a queue, you lock DLRS as escrow:
+Getting in line is simple: specify which stablecoin you want and how much. Your spot is held until either:
+- The stablecoin becomes available and you receive it
+- You leave the line
 
-```solidity
-// Lock 1,000 DLRS to wait for 1,000 USDC
-uint256 positionId = dollarStore.joinQueue(USDC_ADDRESS, 1000e6);
-```
-
-Your DLRS is burned when you join. If the position is filled, you receive the stablecoin. If you cancel, your DLRS is minted back.
-
-## Queue processing
-
-When someone deposits a stablecoin, the queue for that stablecoin is processed automatically:
-
-1. The first position in queue receives funds (or partial fill)
-2. If fully filled, the position is removed
-3. Process continues until deposit is exhausted or queue is empty
-4. Any remainder goes to reserves
+If you leave, you can withdraw any available stablecoin instantly. If you want to get back in line, you go to the back.
 
 ```
-Queue for USDC (before deposit):
+Queue for USDC:
   Position 1: Alice wants 500 USDC
   Position 2: Bob wants 1,000 USDC
   Position 3: Carol wants 200 USDC
 
-Someone deposits 800 USDC:
-  → Alice receives 500 USDC (position removed)
-  → Bob receives 300 USDC (position updated to 700 remaining)
+Someone supplies 800 USDC:
+  → Alice receives 500 USDC (leaves queue)
+  → Bob receives 300 USDC (still in line for 700 more)
   → Carol still waiting
 
-Queue for USDC (after deposit):
-  Position 1: Bob wants 700 USDC (partially filled)
+Queue for USDC (after):
+  Position 1: Bob wants 700 USDC
   Position 2: Carol wants 200 USDC
 ```
 
 ## Partial fills
 
 Positions can be partially filled. When this happens:
-- You receive the partial amount immediately
-- Your position remains in queue for the rest
+- The user receives the partial amount immediately
+- The position remains in queue for the rest
 - The `QueueFilled` event shows both filled and remaining amounts
+
+## Leaving the queue
+
+Users can leave the queue at any time:
+
+```solidity
+dollarStore.cancelQueue(positionId);
+```
+
+After leaving, users can immediately withdraw any stablecoin that's available in supply. If they want to get back in line for a specific stablecoin, they join at the back.
 
 ## Queue limits
 
@@ -73,13 +71,3 @@ The minimum order size increases as the queue gets deeper:
 | 125-149 | $10,000,000 |
 
 This prevents queue spam and ensures positions are meaningful at scale.
-
-## Canceling a position
-
-You can cancel your queue position at any time:
-
-```solidity
-uint256 dlrsReturned = dollarStore.cancelQueue(positionId);
-```
-
-If your position was partially filled, you receive the remaining DLRS (not the already-filled portion, which you already received as stablecoin).

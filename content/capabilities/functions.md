@@ -10,7 +10,7 @@ description: Complete function reference for DollarStore
 
 ### deposit
 
-Deposit a stablecoin and receive DLRS at 1:1.
+Supply a stablecoin to the protocol. The system records DLRS at 1:1.
 
 ```solidity
 function deposit(
@@ -21,16 +21,16 @@ function deposit(
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `stablecoin` | address | Supported stablecoin to deposit |
-| `amount` | uint256 | Amount to deposit (6 decimals) |
+| `stablecoin` | address | Supported stablecoin to supply |
+| `amount` | uint256 | Amount to supply (6 decimals) |
 
-**Returns:** Amount of DLRS minted (always equals `amount`)
+**Returns:** Amount of DLRS recorded (always equals `amount`)
 
 **Effects:**
-- Transfers `stablecoin` from caller
+- Protocol transfers `stablecoin` from caller
 - Processes queue for that stablecoin (fills waiting positions)
 - Adds remainder to reserves
-- Mints DLRS to caller
+- Records DLRS for caller
 
 **Reverts if:**
 - `amount` is 0
@@ -41,7 +41,7 @@ function deposit(
 
 ### withdraw
 
-Burn DLRS and receive a stablecoin at 1:1.
+Request a stablecoin from reserves. Uses DLRS at 1:1.
 
 ```solidity
 function withdraw(
@@ -52,8 +52,8 @@ function withdraw(
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `stablecoin` | address | Stablecoin to withdraw |
-| `amount` | uint256 | Amount to withdraw (6 decimals) |
+| `stablecoin` | address | Stablecoin to request |
+| `amount` | uint256 | Amount to request (6 decimals) |
 
 **Returns:** Amount of stablecoin received (always equals `amount`)
 
@@ -85,7 +85,7 @@ function swap(
 | `fromStablecoin` | address | Input stablecoin |
 | `toStablecoin` | address | Output stablecoin |
 | `amount` | uint256 | Amount to swap |
-| `queueIfUnavailable` | bool | If true, queue unfilled portion; if false, mint DLRS |
+| `queueIfUnavailable` | bool | If true, queue unfilled portion; if false, record DLRS |
 
 **Returns:**
 - `received`: Amount filled instantly
@@ -95,7 +95,7 @@ function swap(
 
 ### swapFromDLRS
 
-Swap DLRS for a stablecoin.
+Request a stablecoin using DLRS.
 
 ```solidity
 function swapFromDLRS(
@@ -108,7 +108,7 @@ function swapFromDLRS(
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `toStablecoin` | address | Output stablecoin |
-| `dlrsAmount` | uint256 | Amount of DLRS to swap |
+| `dlrsAmount` | uint256 | Amount of DLRS to use |
 | `queueIfUnavailable` | bool | If true, queue unfilled portion |
 
 ---
@@ -150,7 +150,7 @@ function swapExactInput(
 
 ### joinQueue
 
-Join the queue for a stablecoin. Burns DLRS as escrow.
+Enter the queue for a stablecoin. Commits DLRS to the protocol.
 
 ```solidity
 function joinQueue(
@@ -161,8 +161,8 @@ function joinQueue(
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `stablecoin` | address | Stablecoin you want to receive |
-| `dlrsAmount` | uint256 | Amount of DLRS to lock |
+| `stablecoin` | address | Stablecoin to wait for |
+| `dlrsAmount` | uint256 | Amount of DLRS to commit |
 
 **Returns:** Unique position ID
 
@@ -175,7 +175,7 @@ function joinQueue(
 
 ### cancelQueue
 
-Cancel a queue position and reclaim DLRS.
+Cancel a queue position. Protocol returns DLRS.
 
 ```solidity
 function cancelQueue(
@@ -309,7 +309,7 @@ function isSupported(address stablecoin) external view returns (bool)
 
 ### dlrsToken
 
-Get the DLRS token address.
+Get the DLRS contract address.
 
 ```solidity
 function dlrsToken() external view returns (address)

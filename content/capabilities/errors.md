@@ -6,7 +6,7 @@ description: Error conditions and how to handle them
 
 # Errors
 
-DollarStore uses custom errors for gas-efficient reverts with clear failure reasons.
+The DollarStore protocol uses custom errors for gas-efficient reverts with clear failure reasons.
 
 ## Validation errors
 
@@ -56,7 +56,7 @@ Address parameter was the zero address.
 error SameStablecoin();
 ```
 
-Swap attempted with same input and output stablecoin. Use deposit/withdraw instead.
+Swap attempted with same input and output stablecoin.
 
 ---
 
@@ -191,6 +191,18 @@ error OnlyPendingAdmin();
 ```
 
 Only the pending admin can accept admin transfer.
+
+---
+
+## Token errors
+
+### NonTransferable
+
+```solidity
+error NonTransferable();
+```
+
+DLRS transfers are not permitted. DLRS is a non-transferable internal accounting reference. This error is thrown when calling `transfer()`, `transferFrom()`, or `approve()` on the DLRS contract.
 
 ---
 

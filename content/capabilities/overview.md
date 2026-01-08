@@ -6,12 +6,12 @@ description: Contract architecture and integration points
 
 # Capabilities Overview
 
-DollarStore consists of two contracts:
+The DollarStore protocol consists of two contracts:
 
 | Contract | Purpose |
 |----------|---------|
-| **DollarStore** | Main protocol logic—deposits, withdrawals, swaps, queue |
-| **DLRS** | ERC-20 receipt token (deployed by DollarStore) |
+| **DollarStore** | Main protocol logic—liquidity supply, withdrawals, swaps, queue |
+| **DLRS** | Non-transferable internal accounting reference |
 
 ## Supported stablecoins
 
@@ -64,21 +64,21 @@ Use `swap` with the queue option for maximum flexibility:
 // positionId = queue position (0 if fully filled)
 ```
 
-### For DLRS holders
+### Using DLRS
 
-Convert DLRS to any stablecoin:
+Request stablecoins using DLRS:
 
 ```solidity
 (uint256 received, uint256 positionId) = dollarStore.swapFromDLRS(
-    USDT,       // which stablecoin you want
-    dlrsAmount, // how much DLRS to convert
+    USDT,       // which stablecoin to request
+    dlrsAmount, // how much DLRS to use
     true        // queue if needed
 );
 ```
 
 ## Key invariants
 
-1. **1:1 ratio**: All operations preserve 1:1 between DLRS and stablecoins
+1. **1:1 ratio**: All operations maintain 1:1 accounting between DLRS and stablecoins
 2. **No fees**: Zero protocol fees on any operation
 3. **FIFO ordering**: Queue positions processed strictly first-in-first-out
 4. **Atomic operations**: Each transaction either fully completes or reverts (for aggregator functions)
