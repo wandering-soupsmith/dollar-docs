@@ -14,7 +14,7 @@ DollarStore is open-source smart contract software that enables zero-fee stablec
 
 ### What's the catch?
 
-Time. If reserves are available, the protocol executes swaps instantly. If not, users wait in a queue until someone supplies what they need.
+Time. If supply is available, the protocol executes swaps instantly. If not, users wait in a queue until someone supplies what they need.
 
 ### Why use this instead of Uniswap?
 
@@ -32,9 +32,9 @@ DLRS is an internal accounting reference used by the protocol to track liquidity
 
 1. Approve the DollarStore contract to spend USDC
 2. Call `swap(USDC, USDT, amount, true)`
-3. Protocol transfers USDT instantly (if reserves available) or adds user to queue
+3. Protocol transfers USDT instantly (if supply is available) or adds user to queue
 
-### What happens if reserves are empty?
+### What happens if supply is empty?
 
 Users have options:
 - Queue for what's needed (wait for others to supply)
@@ -67,7 +67,7 @@ No. DLRS is non-transferable. Calls to `transfer()`, `transferFrom()`, and `appr
 
 ### What can I do with DLRS?
 
-DLRS can be used within the protocol to request stablecoins from reserves or enter the queue.
+DLRS can be used within the protocol to request stablecoins from supply or enter the queue.
 
 ---
 

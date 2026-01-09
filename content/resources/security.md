@@ -42,13 +42,13 @@ This software has **not been audited**. Use at your own risk. Do not supply fund
 
 ## Known limitations
 
-### Reserves can be depleted
+### Supply can be depleted
 
-If everyone wants the same stablecoin, reserves deplete and users queue. This is by design—the protocol's tradeoff is time, not price.
+If everyone wants the same stablecoin, supply depletes and users queue. This is by design—the protocol's tradeoff is time, not price.
 
 ### No partial fill protection for `swapExactInput`
 
-The aggregator function either fully fills or reverts. No slippage protection is needed since rate is always 1:1, but reserves can deplete between quote and execution.
+The aggregator function either fully fills or reverts. No slippage protection is needed since rate is always 1:1, but supply can deplete between quote and execution.
 
 ### Queue position value can change
 

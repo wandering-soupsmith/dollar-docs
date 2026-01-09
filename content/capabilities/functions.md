@@ -41,7 +41,7 @@ function deposit(
 
 ### withdraw
 
-Request a stablecoin from reserves. Uses DLRS at 1:1.
+Request a stablecoin from supply. Uses DLRS at 1:1.
 
 ```solidity
 function withdraw(
@@ -60,7 +60,7 @@ function withdraw(
 **Reverts if:**
 - `amount` is 0
 - `stablecoin` not supported
-- Insufficient reserves
+- Insufficient supply
 - Caller has insufficient DLRS
 
 ---
@@ -141,7 +141,7 @@ function swapExactInput(
 
 **Reverts if:**
 - Deadline passed
-- Insufficient reserves (no partial fills)
+- Insufficient supply (no partial fills)
 - Any validation fails
 
 ---
